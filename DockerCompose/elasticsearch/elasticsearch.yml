@@ -1,0 +1,33 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+# License
+xpack.license.self_generated.type: basic
+
+# Monitoring
+xpack.monitoring.collection.enabled: true
+
+
+kibana/Dockerfile
+
+ARG ELK_VERSION
+
+# https://www.docker.elastic.co/
+FROM docker.elastic.co/kibana/kibana:${ELK_VERSION
+
+
+
+kibana/kibana.yml
+server:
+  name: "elk"
+  host: "0.0.0.0"
+  port: 5601
+  basePath: /kibana
+  rewriteBasePath: true
+
+# When enabling encryption between Kibana and Elasticsearch, change "http" to "https" below:
+elasticsearch.hosts: ["http://elasticsearch01:9200"]
+
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+
+csp.strict: false
